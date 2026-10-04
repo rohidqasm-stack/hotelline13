@@ -1,0 +1,829 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Hotel Line | Official Hotels</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --navy: #14243b;
+    --gold: #c99b50;
+    --bg: #f5f6f8;
+    --gray: #7b8797;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--bg);
+    color: var(--navy);
+}
+
+/* HEADER */
+
+header {
+    background: white;
+    padding: 18px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 3px 20px #00000008;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 23px;
+    font-weight: 700;
+}
+
+.logo-icon {
+    width: 43px;
+    height: 43px;
+    background: var(--navy);
+    color: var(--gold);
+    display: grid;
+    place-items: center;
+    border-radius: 11px;
+    font-size: 25px;
+}
+
+.logo span:last-child {
+    color: var(--gold);
+}
+
+.header-label {
+    font-size: 12px;
+    color: var(--gray);
+    letter-spacing: 2px;
+}
+
+/* HERO */
+
+.hero {
+    background: linear-gradient(120deg, #14243b, #253d5b);
+    padding: 65px 7% 75px;
+    color: white;
+    text-align: center;
+}
+
+.hero small {
+    color: var(--gold);
+    letter-spacing: 4px;
+    font-weight: 600;
+}
+
+.hero h1 {
+    font-size: clamp(30px, 5vw, 48px);
+    margin: 15px 0;
+}
+
+.hero h1 span {
+    color: var(--gold);
+}
+
+.hero p {
+    color: #cbd3df;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+/* MAIN */
+
+.container {
+    max-width: 1150px;
+    margin: -28px auto 70px;
+    padding: 0 20px;
+    position: relative;
+}
+
+/* SEARCH */
+
+.search-box {
+    background: white;
+    padding: 12px;
+    border-radius: 14px;
+    box-shadow: 0 10px 35px #00000010;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 45px;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 13px;
+    border: none;
+    outline: none;
+    font-family: inherit;
+    font-size: 14px;
+}
+
+.search-icon {
+    padding-left: 12px;
+    font-size: 20px;
+}
+
+/* SECTION TITLE */
+
+.section-title {
+    margin-bottom: 25px;
+}
+
+.section-title small {
+    color: var(--gold);
+    font-weight: 700;
+    letter-spacing: 3px;
+}
+
+.section-title h2 {
+    font-size: 29px;
+    margin-top: 8px;
+}
+
+.section-title p {
+    color: var(--gray);
+    font-size: 13px;
+    margin-top: 5px;
+}
+
+/* HOTEL CARDS */
+
+.hotel-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.hotel-card {
+    background: white;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid #e8ebf0;
+    transition: .3s;
+}
+
+.hotel-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 15px 35px #00000012;
+}
+
+.hotel-photo {
+    height: 190px;
+    position: relative;
+}
+
+.hotel-photo img {
+    width: 100%;
+    height: 90%;
+    object-fit: cover;
+}
+
+.official {
+    position: absolute;
+    top: 13px;
+    left: 13px;
+    background: white;
+    color: #1c704b;
+    padding: 6px 11px;
+    border-radius: 30px;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.hotel-content {
+    padding: 20px;
+}
+
+.hotel-content h3 {
+    font-size: 17px;
+    margin-bottom: 9px;
+}
+
+.location {
+    color: var(--gray);
+    font-size: 12px;
+    margin-bottom: 17px;
+}
+
+.view-btn {
+    width: 100%;
+    background: var(--navy);
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-family: inherit;
+    font-weight: 600;
+    font-size: 12px;
+    transition: .3s;
+}
+
+.view-btn:hover {
+    background: var(--gold);
+    color: var(--navy);
+}
+
+/* HOTEL DETAILS */
+
+.details {
+    display: none;
+    background: white;
+    border-radius: 16px;
+    margin-top: 45px;
+    overflow: hidden;
+    box-shadow: 0 10px 35px #0000000c;
+}
+
+.details.active {
+    display: block;
+    animation: appear .4s ease;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.details-header {
+    background: var(--navy);
+    color: white;
+    padding: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.details-header small {
+    color: var(--gold);
+    letter-spacing: 2px;
+}
+
+.details-header h2 {
+    margin-top: 8px;
+    font-size: 24px;
+}
+
+.close-btn {
+    width: 38px;
+    height: 38px;
+    border: none;
+    border-radius: 50%;
+    background: #ffffff20;
+    color: white;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.details-body {
+    padding: 25px;
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 10px;
+    width: 100%;
+    height: 230px;
+    margin-bottom: 30px;
+    align-items: stretch;
+}
+
+.gallery img {
+    display: block;
+    width: 100%;
+    height: 90%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.info-title {
+    font-size: 20px;
+    margin-bottom: 18px;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.info-item {
+    background: #f6f7f9;
+    padding: 18px;
+    border-radius: 10px;
+}
+
+.info-item small {
+    display: block;
+    color: var(--gray);
+    font-size: 11px;
+    margin-bottom: 7px;
+}
+
+.info-item strong {
+    font-size: 13px;
+    overflow-wrap: anywhere;
+}
+
+.description {
+    margin-top: 20px;
+    background: #f6f7f9;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.description h4 {
+    margin-bottom: 10px;
+}
+
+.description p {
+    font-size: 13px;
+    color: var(--gray);
+    line-height: 1.9;
+}
+
+.website-btn {
+    display: inline-block;
+    margin-top: 20px;
+    background: var(--gold);
+    color: var(--navy);
+    padding: 12px 22px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+/* FOOTER */
+
+footer {
+    background: var(--navy);
+    color: white;
+    text-align: center;
+    padding: 35px 15px;
+}
+
+footer h3 {
+    font-size: 22px;
+}
+
+footer h3 span {
+    color: var(--gold);
+}
+
+footer p {
+    color: #aab6c7;
+    font-size: 12px;
+    margin-top: 10px;
+}
+
+footer .copy {
+    margin-top: 25px;
+    border-top: 1px solid #ffffff20;
+    padding-top: 20px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width: 800px) {
+    .hotel-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media(max-width: 550px) {
+    header {
+        padding: 15px 5%;
+    }
+
+    .header-label {
+        display: none;
+    }
+
+    .hero {
+        padding: 55px 6% 65px;
+    }
+
+    .container {
+        padding: 0 15px;
+    }
+
+    .hotel-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hotel-photo {
+        height: 220px;
+    }
+
+    .section-title h2 {
+        font-size: 25px;
+    }
+
+    .details-header h2 {
+        font-size: 19px;
+    }
+
+    .details-body {
+        padding: 15px;
+    }
+
+    .gallery {
+        height: 150px;
+        gap: 5px;
+    }
+
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .info-item {
+        padding: 14px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<header>
+    <div class="logo">
+        <div class="logo-icon">H</div>
+        <div>Hotel <span>Line</span></div>
+    </div>
+
+    <div class="header-label">
+        OFFICIAL HOTEL DIRECTORY
+    </div>
+</header>
+
+
+<!-- HERO -->
+
+<section class="hero">
+    <small>WELCOME TO HOTEL LINE</small>
+
+    <h1>Discover <span>Official Hotels</span></h1>
+
+    <p>
+        Explore hotels, view their information
+        and discover your next destination.
+    </p>
+</section>
+
+
+<main class="container">
+
+    <!-- SEARCH -->
+
+    <div class="search-box">
+        <span class="search-icon">⌕</span>
+
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Search hotel by name..."
+            oninput="searchHotels()"
+        >
+    </div>
+
+
+    <!-- HOTEL LIST -->
+
+    <div class="section-title">
+        <small>HOTEL COLLECTION</small>
+        <h2>Our Official Hotels</h2>
+        <p>Select a hotel to view its information.</p>
+    </div>
+
+    <div class="hotel-grid" id="hotelGrid"></div>
+
+
+    <!-- HOTEL DETAILS -->
+
+    <section class="details" id="hotelDetails">
+
+        <div class="details-header">
+            <div>
+                <small>HOTEL INFORMATION</small>
+                <h2 id="detailName"></h2>
+            </div>
+
+            <button class="close-btn" onclick="closeDetails()">×</button>
+        </div>
+
+        <div class="details-body">
+
+            <div class="gallery" id="gallery"></div>
+
+            <h3 class="info-title">Hotel Details</h3>
+
+            <div class="info-grid">
+
+                <div class="info-item">
+                    <small>Official Name</small>
+                    <strong id="infoName"></strong>
+                </div>
+
+                <div class="info-item">
+                    <small>Location</small>
+                    <strong id="infoLocation"></strong>
+                </div>
+
+                <div class="info-item">
+                    <small>Phone Number</small>
+                    <strong id="infoPhone"></strong>
+                </div>
+
+                <div class="info-item">
+                    <small>Email Address</small>
+                    <strong id="infoEmail"></strong>
+                </div>
+
+            </div>
+
+            <div class="description">
+                <h4>About This Hotel</h4>
+                <p id="infoDescription"></p>
+            </div>
+
+            <a
+                href="#"
+                target="_blank"
+                class="website-btn"
+                id="infoWebsite"
+            >
+                حجزکردن →
+            </a>
+
+        </div>
+    </section>
+
+</main>
+
+
+<!-- FOOTER -->
+
+<footer>
+    <h3>Hotel <span>Line</span></h3>
+
+    <p>Your Guide to Official Hotels</p>
+
+    <p class="copy">
+        © 2026 Hotel Line. All Rights Reserved.
+    </p>
+</footer>
+
+
+<script>
+
+// ===================================
+// HOTEL INFORMATION
+// Add your official hotels here
+// ===================================
+
+const hotels = [
+
+    {
+        id: 1,
+
+        name: "Armas pemar beach",
+        location: "Turkey, Antalya-Manavgat ",
+
+        phone: "+964 750 161 7786",
+        email: "hotelline13@email.com",
+
+        description:
+        "Armas Pemar Beach Resort هەڵبژاردەیەکی گونجاوە بۆ ئەو میوانانەی دەیانەوێت لە ژینگەیەکی فراوان و سروشتی، نزیک دەریا و بە خزمەتگوزارییە جۆراوجۆرەکان، پشوویەکی خۆش بەسەر بەرن.",
+
+        website: "https://wa.me/qr/UQBNETXGKJXTN1",
+
+        images: [
+            "https://armashotels.com/files/armas-pemar-beach-resort_372_1739888924.jpeg?w=900",
+            "https://www.bgoperator.ru/pr_img/1240100354/20230217/49921993/17022023160521993.jpg?w=700",
+            "https://armashotels.com/files/standart-kara-manzarali-oda_901_1717762549.jpg?w=700"
+        ]
+    },
+
+    {
+        id: 2,
+
+        name: "ROYAL SEGINUS",
+        location: "Turkey, Antalya-Lara",
+
+        phone: "+964 750 161 7786",
+        email: "hotelline13@email.com",
+
+        description:
+        "هوتێلێکی لوکس له‌ ئه‌نتالیا، به‌ ژووری جوان، حه‌وزی گه‌وره‌ و چالاکییه‌ جوراوجوره‌کان بۆ گه‌شتێکی جوش ، شوێنیکی گونجاو بۆ پشوودان و به‌سه‌ربردنی پوشوویه‌کی بیرنه‌چونونه‌وه.",
+
+        website: "https://wa.me/qr/UQBNETXGKJXTN1",
+
+        images: [
+            "https://royal-seginus.antalyahotel.org/data/Pictures/OriginalPhoto/12799/1279928/1279928077/antalya-royal-seginus-hotel-picture-1.JPEG?w=900",
+            "https://sundio-media.azureedge.net/products/Images/Original/36100000/96000/36196806-Original.jpg?width=1920&height=1280&scale=both&mode=crop?w=700",
+            "https://www.jet2holidays.com/HotelImages/Web/AYT_87716_Royal_Seginus_Hotel_0624_29.jpg?w=700"
+        ]
+    },
+
+    {
+        id: 3,
+
+        name: "Divan Hotel",
+        location: "Erbil, Kurdistan",
+
+        phone: "+964 750 000 0000",
+        email: "example@email.com",
+
+        description:
+        "Add the official hotel information and introduction here.",
+
+        website: "https://example.com",
+
+        images: [
+            "https://images.unsplash.com/photo-1590490360182-c33d57733427?w=900",
+            "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=700",
+            "https://images.unsplash.com/photo-1595576508898-0ad5c879a061?w=700"
+        ]
+    }
+
+];
+
+
+// ===================================
+// DISPLAY HOTELS
+// ===================================
+
+function displayHotels(list = hotels) {
+
+    const grid = document.getElementById("hotelGrid");
+
+    grid.innerHTML = "";
+
+    list.forEach(hotel => {
+
+        grid.innerHTML += `
+
+            <div class="hotel-card">
+
+                <div class="hotel-photo">
+
+                    <img
+                        src="${hotel.images[0]}"
+                        alt="${hotel.name}"
+                    >
+
+                    <span class="official">
+                        ✓ OFFICIAL
+                    </span>
+
+                </div>
+
+                <div class="hotel-content">
+
+                    <h3>${hotel.name}</h3>
+
+                    <div class="location">
+                        📍 ${hotel.location}
+                    </div>
+
+                    <button
+                        class="view-btn"
+                        onclick="showDetails(${hotel.id})"
+                    >
+                        View Hotel Information →
+                    </button>
+
+                </div>
+
+            </div>
+
+        `;
+
+    });
+
+}
+
+
+// ===================================
+// SHOW DETAILS
+// ===================================
+
+function showDetails(id) {
+
+    const hotel = hotels.find(item => item.id === id);
+
+    if (!hotel) return;
+
+    document.getElementById("detailName").textContent =
+        hotel.name;
+
+    document.getElementById("infoName").textContent =
+        hotel.name;
+
+    document.getElementById("infoLocation").textContent =
+        hotel.location;
+
+    document.getElementById("infoPhone").textContent =
+        hotel.phone;
+
+    document.getElementById("infoEmail").textContent =
+        hotel.email;
+
+    document.getElementById("infoDescription").textContent =
+        hotel.description;
+
+    const website = document.getElementById("infoWebsite");
+
+    website.href = hotel.website;
+
+    // Gallery
+
+    const gallery = document.getElementById("gallery");
+
+    gallery.innerHTML = "";
+
+    hotel.images.forEach(image => {
+
+        const img = document.createElement("img");
+
+        img.src = image;
+        img.alt = hotel.name;
+
+        gallery.appendChild(img);
+
+    });
+
+    const details = document.getElementById("hotelDetails");
+
+    details.classList.add("active");
+
+    details.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
+
+}
+
+
+// ===================================
+// CLOSE DETAILS
+// ===================================
+
+function closeDetails() {
+
+    document.getElementById("hotelDetails")
+        .classList.remove("active");
+
+}
+
+
+// ===================================
+// SEARCH HOTELS
+// ===================================
+
+function searchHotels() {
+
+    const value = document
+        .getElementById("searchInput")
+        .value.toLowerCase();
+
+    const filtered = hotels.filter(hotel =>
+        hotel.name.toLowerCase().includes(value)
+    );
+
+    displayHotels(filtered);
+
+}
+
+
+// INITIALIZE
+
+displayHotels();
+
+</script>
+
+</body>
+</html>
